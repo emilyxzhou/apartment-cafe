@@ -1,0 +1,40 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---- events/{eventId} -----------------------------------------------
+    // Public can read event details (menu, date, capacity) so the site can
+    // display them. Public can NEVER create or delete an event, and can
+    // only ever update the `signupCount` field, by exactly +1 at a time,
+    // and only while there's still room — this is what makes the sign-up
+    // form's capacity check race-condition-safe without a Cloud Function.
+    // The cafe owner edits everything else (menu, dateTime, capacity,
+    // backgroundImage, title) from the Firebase Console, which uses
+    // privileged access and is not subject to these rules.
+    match /events/{eventId} {
+      allow read: if true;
+      allow create, delete: if false;
+      allow update: if
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['signupCount']) &&
+        request.resource.data.signupCount == resource.data.signupCount + 1 &&
+        resource.data.signupCount < resource.data.capacity;
+    }
+
+    // ---- signups/{signupId} ----------------------------------------------
+    // Anyone can create a signup (that's the point of the form), but nobody
+    // can read, edit, or delete the guest list from the client — the owner
+    // reviews signups directly in the Firebase Console. Basic shape
+    // validation guards against malformed or empty submissions.
+    match /signups/{signupId} {
+      allow read, update, delete: if false;
+      allow create: if
+        request.resource.data.keys().hasOnly(['firstName', 'lastName', 'email', 'eventId', 'eventTitle', 'eventDateTime', 'createdAt']) &&
+        request.resource.data.firstName is string && request.resource.data.firstName.size() > 0 && request.resource.data.firstName.size() < 100 &&
+        request.resource.data.lastName is string && request.resource.data.lastName.size() > 0 && request.resource.data.lastName.size() < 100 &&
+        request.resource.data.email is string &&
+        request.resource.data.email.matches('^[^@\\s]+@[^@\\s]+[.][^@\\s]+$') &&
+        request.resource.data.eventId is string;
+    }
+  }
+}

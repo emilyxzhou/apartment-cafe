@@ -1,0 +1,408 @@
+/* ============================================================
+   Apartment Café — vintage Japanese-poster inspired styling
+   Palette: cream paper, charcoal ink, rust-orange + indigo accents
+   ============================================================ */
+
+:root {
+  --cream: #f3ecdc;
+  --cream-deep: #eadfc4;
+  --ink: #2b2620;
+  --ink-soft: #55503f;
+  --rust: #c94f26;
+  --rust-dark: #a53f1d;
+  --indigo: #33567d;
+  --indigo-dark: #24405e;
+
+  --font-display: "Abril Fatface", "Times New Roman", serif;
+  --font-body: "Work Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --max-width: 640px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+/* ---------- shared layout helpers ---------- */
+
+.section {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 3.5rem 1.5rem;
+  position: relative;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  color: var(--rust);
+  font-size: clamp(1.8rem, 5vw, 2.4rem);
+  text-align: center;
+  margin: 0 0 0.25rem;
+  letter-spacing: 0.01em;
+}
+
+.section-sub {
+  text-align: center;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin: 0 0 2rem;
+  font-size: 0.95rem;
+}
+
+.dotted-divider {
+  border-top: 3px dotted var(--rust);
+  max-width: 480px;
+  margin: 0 auto;
+  opacity: 0.8;
+}
+
+.dotted-divider--section {
+  max-width: 200px;
+}
+
+/* ---------- decorative doodles ---------- */
+
+.doodle {
+  position: absolute;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.doodle--cup {
+  width: 90px;
+  top: 1.5rem;
+  right: 6%;
+  stroke: var(--indigo);
+  stroke-width: 2.2;
+  opacity: 0.75;
+}
+
+.doodle-steam {
+  stroke: var(--indigo);
+  opacity: 0.5;
+}
+
+.doodle--citrus {
+  width: 70px;
+  bottom: 1rem;
+  left: 6%;
+  stroke: var(--rust);
+  stroke-width: 2.2;
+  opacity: 0.6;
+}
+
+.doodle--leaf {
+  width: 60px;
+  top: -1.5rem;
+  right: 8%;
+  stroke: var(--indigo);
+  stroke-width: 2.2;
+  opacity: 0.55;
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+  position: relative;
+  padding: 4.5rem 1.5rem 3rem;
+  text-align: center;
+  overflow: hidden;
+  background: radial-gradient(circle at 15% 20%, rgba(201, 79, 38, 0.08), transparent 45%),
+    radial-gradient(circle at 85% 75%, rgba(51, 86, 125, 0.1), transparent 45%), var(--cream-deep);
+  background-size: cover;
+  background-position: center;
+}
+
+.hero .paper-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.hero-kicker {
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.75rem;
+  color: var(--rust);
+  margin: 0 0 0.75rem;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 13vw, 5.5rem);
+  line-height: 1;
+  margin: 0 0 1rem;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+
+.hero-tagline {
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  margin: 0 auto 2.5rem;
+  max-width: 380px;
+}
+
+.hero .dotted-divider {
+  position: relative;
+  z-index: 1;
+  max-width: 260px;
+}
+
+/* ---------- menu ---------- */
+
+.menu-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+}
+
+.menu-loading,
+.menu-error {
+  text-align: center;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.menu-category-title {
+  font-family: var(--font-display);
+  color: var(--indigo);
+  font-size: 1.4rem;
+  margin: 0 0 1rem;
+  text-align: left;
+}
+
+.menu-item {
+  margin-bottom: 1.1rem;
+}
+
+.menu-item-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.menu-item-name {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.menu-item-leader {
+  flex: 1;
+  border-bottom: 2px dotted var(--ink-soft);
+  opacity: 0.4;
+  transform: translateY(-4px);
+}
+
+.menu-item-price {
+  font-weight: 600;
+  color: var(--rust-dark);
+  white-space: nowrap;
+}
+
+.menu-item-desc {
+  margin: 0.25rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* ---------- event / ticket stub ---------- */
+
+.event-section {
+  display: flex;
+  justify-content: center;
+}
+
+.ticket-stub {
+  position: relative;
+  border: 2px dashed var(--indigo);
+  border-radius: 6px;
+  padding: 1.75rem 2.25rem;
+  text-align: center;
+  background: var(--cream-deep);
+  transform: rotate(-1deg);
+  max-width: 360px;
+}
+
+.ticket-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.7rem;
+  color: var(--indigo);
+  margin: 0 0 0.5rem;
+}
+
+.ticket-date {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--ink);
+  margin: 0 0 0.6rem;
+  line-height: 1.3;
+}
+
+.ticket-spots {
+  font-size: 0.9rem;
+  color: var(--rust-dark);
+  font-weight: 600;
+  margin: 0;
+}
+
+.ticket-spots.is-full {
+  color: var(--ink-soft);
+}
+
+/* ---------- signup form ---------- */
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.field-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.field input {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--ink);
+  padding: 0.5rem 0.1rem;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: var(--rust);
+}
+
+.field input:disabled {
+  opacity: 0.4;
+}
+
+.submit-btn {
+  font-family: var(--font-display);
+  background: var(--rust);
+  color: var(--cream);
+  border: none;
+  padding: 0.9rem 1.5rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: var(--indigo);
+}
+
+.submit-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.submit-btn:disabled {
+  background: var(--ink-soft);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-message {
+  text-align: center;
+  min-height: 1.2em;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.form-message.success {
+  color: var(--indigo);
+  font-weight: 600;
+}
+
+.form-message.error {
+  color: var(--rust-dark);
+  font-weight: 600;
+}
+
+/* ---------- footer ---------- */
+
+.site-footer {
+  text-align: center;
+  padding: 2.5rem 1.5rem 3rem;
+  color: var(--ink-soft);
+  font-size: 0.8rem;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 420px) {
+  .field-row {
+    flex-direction: column;
+  }
+
+  .doodle--cup {
+    width: 60px;
+  }
+
+  .doodle--citrus {
+    width: 50px;
+  }
+}
+
+@media (min-width: 720px) {
+  .section {
+    padding: 5rem 1.5rem;
+  }
+}

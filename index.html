@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Apartment Café — Weekly Pop-Up Menu &amp; Sign-Up</title>
+<meta name="description" content="A tiny apartment café, one weekend at a time. See this week's menu and reserve your seat." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Work+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="paper-grain" aria-hidden="true"></div>
+
+  <svg class="doodle doodle--cup" viewBox="0 0 100 100" aria-hidden="true">
+    <path d="M20 40 h50 l-4 32 a8 8 0 0 1-8 7H32 a8 8 0 0 1-8-7 Z" />
+    <path d="M70 44 q14-2 14 10 t-14 9" />
+    <path d="M32 30 q2-8-2-14 M45 30 q2-10-3-16 M58 30 q3-9-1-15" class="doodle-steam" />
+  </svg>
+
+  <svg class="doodle doodle--citrus" viewBox="0 0 100 100" aria-hidden="true">
+    <circle cx="50" cy="50" r="34" />
+    <path d="M50 16 V84 M20 50 H80 M28 28 L72 72 M28 72 L72 28" />
+  </svg>
+
+  <div class="hero-inner">
+    <p class="hero-kicker" id="hero-kicker">This Week's Gathering</p>
+    <h1 class="hero-title">Apartment&nbsp;Café</h1>
+    <p class="hero-tagline" id="hero-tagline">A tiny kitchen table, a rotating menu, and a handful of seats — pull one up.</p>
+  </div>
+
+  <div class="dotted-divider" aria-hidden="true"></div>
+</header>
+
+<main>
+
+  <!-- ============ MENU ============ -->
+  <section id="menu" class="section menu-section">
+    <h2 class="section-title">This Week's Menu</h2>
+    <p class="section-sub">Small batches, changed every week.</p>
+
+    <div id="menu-content" class="menu-content" aria-live="polite">
+      <p class="menu-loading">Setting the table…</p>
+    </div>
+  </section>
+
+  <div class="dotted-divider dotted-divider--section" aria-hidden="true"></div>
+
+  <!-- ============ EVENT DETAILS ============ -->
+  <section id="event" class="section event-section">
+    <svg class="doodle doodle--leaf" viewBox="0 0 100 100" aria-hidden="true">
+      <path d="M50 90 C20 70 15 30 50 10 C85 30 80 70 50 90 Z" />
+      <path d="M50 90 V10" />
+    </svg>
+
+    <div class="ticket-stub">
+      <p class="ticket-eyebrow">Next Gathering</p>
+      <p class="ticket-date" id="event-date">Loading…</p>
+      <p class="ticket-spots" id="event-spots"></p>
+    </div>
+  </section>
+
+  <div class="dotted-divider dotted-divider--section" aria-hidden="true"></div>
+
+  <!-- ============ SIGN UP ============ -->
+  <section id="signup" class="section signup-section">
+    <h2 class="section-title">Reserve Your Seat</h2>
+    <p class="section-sub" id="signup-sub">Seats are limited — one form per guest, please.</p>
+
+    <form id="signup-form" class="signup-form" novalidate>
+      <div class="field-row">
+        <label class="field">
+          <span>First name</span>
+          <input type="text" name="firstName" autocomplete="given-name" required />
+        </label>
+        <label class="field">
+          <span>Last name</span>
+          <input type="text" name="lastName" autocomplete="family-name" required />
+        </label>
+      </div>
+      <label class="field">
+        <span>Email</span>
+        <input type="email" name="email" autocomplete="email" required />
+      </label>
+
+      <button type="submit" class="submit-btn" id="signup-submit">Save My Seat</button>
+      <p class="form-message" id="signup-message" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>Made with care, one weekend at a time.</p>
+</footer>
+
+<script type="module" src="js/firebase-config.js"></script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
